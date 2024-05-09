@@ -1,12 +1,25 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+
 <div class="container">
-  <div class="wordData">
-    <pre>
-      <code>
-        {{ wordData?.results?.[0]?.definition | json}}
-      </code>
-    </pre>
-  </div>
-  
-  <input type="text" [(ngModel)]="word" name="word"/>
-  <button (click)="getWord()">Get Word</button>
+    <div class="search-box">
+      <input id="searchBox" type="text" placeholder="Type the word to explore..." [(ngModel)]="word" name="word" (click)="clearInput()"/>
+      <button id="searchBtn" (click)="getWord()">Get Word</button>
+    </div>
+
+    <div class="result">
+      <div class="word">
+        <h3>{{wordData?.word}}</h3>
+        <button><i class="fa-regular fa-star"></i></button>
+      </div>
+      <div class="details">
+        <p>pos</p>
+        <p>/{{ wordData?.pronunciation?.all }}/</p>
+      </div>
+      <p class="word-meaning">{{ wordData?.results?.[0]?.definition }}</p>
+      <p class="word-example">{{ wordData?.results?.[0]?.examples?.[0] }}</p>
+    </div>
+    
 </div>

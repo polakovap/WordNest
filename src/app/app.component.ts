@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { WordDetails, WordapiService } from './services/wordapi.service';
+import { RandomWord, WordDetails, WordapiService } from './services/wordapi.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -14,12 +13,31 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   wordapiService = inject(WordapiService);
-  word = '';
-
+  
+  word?: string;
+  randomWord?: RandomWord;
   wordData?: WordDetails;
 
+  ngOnInit(): void {
+    this.getRandomWord();
+  }
+
+  getRandomWord() {
+    this.wordapiService.getRandomWord().subscribe({
+      next: (data) => {
+        this.randomWord = data;
+        this.word = this.randomWord.word;
+        this.getWord();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    })
+  }
+
+
   getWord() {
-    this.wordapiService.getWord(this.word).subscribe({
+    this.wordapiService.getWordDetails(this.word).subscribe({
       next: (data) => {
       this.wordData = data;
       
@@ -29,4 +47,9 @@ export class AppComponent {
     },
     });
   }
+
+  clearInput(){
+    this.word=''; 
+  }
+
 }

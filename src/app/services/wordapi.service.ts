@@ -7,9 +7,21 @@ export interface WordDetails {
   results: {
     definition: string;
     partOfSpeech: string;
-    synonyms: string[];
-    typeOf: string[];
-    antonyms: string[];
+    synonyms?: string[];
+    typeOf?: string[];
+    antonyms?: string[];
+    hasTypes?: string[];
+    hasParts?: string[];
+    derivation?: string[];
+    examples?: string[];
+    instanceOf?: string[];
+    hasMembers?: string[];
+    hasCategories?: string[];
+    hasInstances?: string[];
+    verbGroup?: string[];
+    entails?: string[];
+    inCategory?: string[];
+    partOf?: string[];
   }[];
   syllables: {
     count: number;
@@ -21,6 +33,12 @@ export interface WordDetails {
   frequency: number;
 }
 
+//interface for random word
+export interface RandomWord {
+  word: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +46,7 @@ export class WordapiService {
   private http = inject(HttpClient);
   constructor() { }
 
-  getWord(word?: string) {
+  getWordDetails(word?: string) {
     return this.http.get<WordDetails>('https://wordsapiv1.p.rapidapi.com/words/' + word, {
       headers:{
         'X-RapidAPI-Key': '51a1018237mshbc5f8a742974c3fp174f73jsn069fd4b5466e',
@@ -36,4 +54,14 @@ export class WordapiService {
       }
     })
   }
+
+  getRandomWord() {
+    return this.http.get<RandomWord>('https://wordsapiv1.p.rapidapi.com/words/?random=true', {
+      headers:{
+        'X-RapidAPI-Key': '51a1018237mshbc5f8a742974c3fp174f73jsn069fd4b5466e',
+		    'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+      }
+    })
+  }
+
 }
