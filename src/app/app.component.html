@@ -1,25 +1,27 @@
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+    <div class="navbar-brand d-flex align-items-center">
+      <h1>WordNest</h1>
+    </div> 
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon">
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/synonyms" routerLinkActive="active" ariaCurrentWhenActive="page">Synonyms</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/rhymes" routerLinkActive="active" ariaCurrentWhenActive="page">Rhymes</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <div class="container">
-    <div class="search-box">
-      <input id="searchBox" type="text" placeholder="Type the word to explore..." [(ngModel)]="word" name="word" (click)="clearInput()"/>
-      <button id="searchBtn" (click)="getWord()">Get Word</button>
-    </div>
-
-    <div class="result">
-      <div class="word">
-        <h3>{{wordData?.word}}</h3>
-        <button><i class="fa-regular fa-star"></i></button>
-      </div>
-      <div class="details">
-        <p>pos</p>
-        <p>/{{ wordData?.pronunciation?.all }}/</p>
-      </div>
-      <p class="word-meaning">{{ wordData?.results?.[0]?.definition }}</p>
-      <p class="word-example">{{ wordData?.results?.[0]?.examples?.[0] }}</p>
-    </div>
-    
+  <router-outlet></router-outlet>
 </div>
