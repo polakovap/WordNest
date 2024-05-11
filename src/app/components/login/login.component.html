@@ -1,0 +1,22 @@
+<div class="container">
+    <form>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="username" placeholder="John18" [(ngModel)]="username">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="login(username, password)">Login</button>
+    </form>
+    <!-- Display success message if login was successful -->
+    <div *ngIf="loginSuccessful" class="alert alert-success mt-2" role="alert">
+        {{ loginMessage }}
+    </div>
+    <!-- Display error message if login failed -->
+    <div *ngIf="!loginSuccessful && loginMessage" class="alert alert-danger mt-2" role="alert">
+        {{ loginMessage }}
+    </div>
+    <p>Don't have an account? <a routerLink="/register">Register</a></p>
+</div>

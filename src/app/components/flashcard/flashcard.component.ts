@@ -17,6 +17,7 @@ export class FlashcardComponent {
   word?: string;
   randomWord?: RandomWord;
   wordData?: WordDetails;
+  errorMessage?: string;
 
   ngOnInit(): void {
     this.getRandomWord();
@@ -37,13 +38,14 @@ export class FlashcardComponent {
 
 
   getWord() {
+    this.errorMessage = ''; // Reset error message
     this.wordapiService.getWordDetails(this.word).subscribe({
       next: (data) => {
       this.wordData = data;
-      
     },
     error: (err) => {
       console.error(err);
+      this.errorMessage = 'Sorry, no words found :(';
     },
     });
   }

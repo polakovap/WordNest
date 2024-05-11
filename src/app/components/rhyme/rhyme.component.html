@@ -1,1 +1,27 @@
-<p>rhyme works!</p>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  </head>
+  
+  
+  <div class="container">
+      <div class="search-box">
+        <input id="searchBox" type="text" placeholder="Type the word to explore..." [(ngModel)]="word" name="word" (click)="clearInput()"/>
+        <button id="searchBtn" (click)="getRhymes()">Get Rhymes</button>
+      </div>
+  
+      <div *ngIf="errorMessage" class="alert alert-danger mt-10">{{ errorMessage }}</div>
+
+      <div class="result" *ngIf="!errorMessage">
+        <div class="word">
+          <h3>{{wordData?.word}}</h3>
+          <button *ngIf="wordData?.word"><i class="fa-regular fa-star"></i></button>
+        </div>
+        <div *ngIf="wordData?.word" >
+            <p *ngIf="!wordData?.rhymes?.all">Sorry, no rhymes available :(</p>
+            <ul *ngIf="wordData?.rhymes?.all">
+                <li *ngFor="let rhyme of wordData?.rhymes?.all">{{rhyme}}</li>
+            </ul>
+        </div>
+      </div>
+      
+  </div>
